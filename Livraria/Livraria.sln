@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaDAL", "LivrariaDAL\LivrariaDAL.csproj", "{48765B23-141B-47C4-8BAD-3C2F1688D648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaWebApi", "LivrariaWebApi\LivrariaWebApi.csproj", "{37659D29-6B97-487E-9BE7-61C8CCA06F90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaWebAppApi", "LivrariaWebAppApi\LivrariaWebAppApi.csproj", "{4EE7E171-487F-448D-A140-084D98902964}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{48765B23-141B-47C4-8BAD-3C2F1688D648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48765B23-141B-47C4-8BAD-3C2F1688D648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48765B23-141B-47C4-8BAD-3C2F1688D648}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37659D29-6B97-487E-9BE7-61C8CCA06F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37659D29-6B97-487E-9BE7-61C8CCA06F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37659D29-6B97-487E-9BE7-61C8CCA06F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37659D29-6B97-487E-9BE7-61C8CCA06F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE7E171-487F-448D-A140-084D98902964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE7E171-487F-448D-A140-084D98902964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE7E171-487F-448D-A140-084D98902964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE7E171-487F-448D-A140-084D98902964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

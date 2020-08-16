@@ -19,6 +19,5 @@ namespace LivrariaDAL
         public int id { get; set; }
     
         public virtual autor autor { get; set; }
-        public virtual Livro Livro { get; set; }
     }
 }

@@ -25,10 +25,11 @@ namespace LivrariaDAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<assunto> assuntoes { get; set; }
         public virtual DbSet<autor> autors { get; set; }
         public virtual DbSet<Livro> Livroes { get; set; }
-        public virtual DbSet<assunto> assuntoes { get; set; }
         public virtual DbSet<livro_assunto> livro_assunto { get; set; }
         public virtual DbSet<livro_autor> livro_autor { get; set; }
+        public virtual DbSet<Vw_Livros> Vw_Livros { get; set; }
     }
 }

@@ -85,6 +85,9 @@
       <DependentUpon>LivrariaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vw_Livros.cs">
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

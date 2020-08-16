@@ -14,20 +14,11 @@ namespace LivrariaDAL
     
     public partial class Livro
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Livro()
-        {
-            this.livro_autor = new HashSet<livro_autor>();
-        }
-    
         public int codL { get; set; }
         public string titulo { get; set; }
         public string editora { get; set; }
         public Nullable<int> edicao { get; set; }
         public string anopublicao { get; set; }
         public Nullable<decimal> preco { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<livro_autor> livro_autor { get; set; }
     }
 }

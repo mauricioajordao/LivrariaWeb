@@ -1,6 +1,7 @@
 ﻿
 var menuapp = angular.module('MenuApp', ['ngMaterial', 'ngRoute']);
- 
+
+
 menuapp.config(function($mdIconProvider) {
     $mdIconProvider
       .defaultIconSet('img/icons/sets/core-icons.svg', 24);

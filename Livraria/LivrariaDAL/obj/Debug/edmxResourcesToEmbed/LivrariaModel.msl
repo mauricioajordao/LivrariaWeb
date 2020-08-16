@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LivrariaDBModelStoreContainer" CdmEntityContainer="LivrariaDBEntities">
+    <EntitySetMapping Name="autors">
+      <EntityTypeMapping TypeName="LivrariaDBModel.autor">
+        <MappingFragment StoreEntitySet="autor">
+          <ScalarProperty Name="codA" ColumnName="codA" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livroes">
+      <EntityTypeMapping TypeName="LivrariaDBModel.Livro">
+        <MappingFragment StoreEntitySet="Livro">
+          <ScalarProperty Name="codL" ColumnName="codL" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="editora" ColumnName="editora" />
+          <ScalarProperty Name="edicao" ColumnName="edicao" />
+          <ScalarProperty Name="anopublicao" ColumnName="anopublicao" />
+          <ScalarProperty Name="preco" ColumnName="preco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="assuntoes">
+      <EntityTypeMapping TypeName="LivrariaDBModel.assunto">
+        <MappingFragment StoreEntitySet="assunto">
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="codAS" ColumnName="codAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="livro_assunto">
+      <EntityTypeMapping TypeName="LivrariaDBModel.livro_assunto">
+        <MappingFragment StoreEntitySet="livro_assunto">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="assunto_codAS" ColumnName="assunto_codAS" />
+          <ScalarProperty Name="livro_codl" ColumnName="livro_codl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="livro_autor">
+      <EntityTypeMapping TypeName="LivrariaDBModel.livro_autor">
+        <MappingFragment StoreEntitySet="livro_autor">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="autor_coda" ColumnName="autor_coda" />
+          <ScalarProperty Name="livro_codL" ColumnName="livro_codL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

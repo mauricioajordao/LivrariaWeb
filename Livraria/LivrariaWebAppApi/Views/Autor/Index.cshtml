@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/App/Autor/AutorController.js"></script>
+<div ng-controller="AutorController" >
+    <div ng-init="ObterTodos()"></div>
+    <br />
+    <a href="/autor/create" class="btn btn-primary btn-xs">Novo Autor</a>
+    <br />
+    <br />
+    <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped">
+            <thead>
+
+            <th>codigo</th>
+            <th>nome</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in ListOfEmployee">
+                    <td>{{item.Codigo}}</td>
+                    <td>{{item.Nome}}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="#/edit/{{item.Codigo}}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-xs" href="#/delete/{{item.Codigo}}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<div class="modal" id="modal">
+
+</div>

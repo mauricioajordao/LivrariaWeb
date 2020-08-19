@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4EE7E171-487F-448D-A140-084D98902964}</ProjectGuid>
+    <ProjectGuid>{A7279798-6CED-4A35-A5DA-6AF7BBB8303F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -155,6 +161,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AutorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,14 +170,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Assunto\Assunto.js" />
+    <Content Include="App\Assunto\AssuntoController.js" />
+    <Content Include="App\Autor\AutorController.js" />
+    <Content Include="App\Autor\Views\AssuntoAlterar.html" />
+    <Content Include="App\Autor\Views\AssuntoApagar.html" />
+    <Content Include="App\LivrariaApp.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -192,6 +215,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -212,8 +237,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Autor\Create.cshtml" />
+    <Content Include="Views\Autor\Delete.cshtml" />
+    <Content Include="Views\Autor\Edit.cshtml" />
+    <Content Include="Views\Autor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\Livro\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -246,6 +276,12 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LivrariaDAL\LivrariaDAL.csproj">
+      <Project>{48765b23-141b-47c4-8bad-3c2f1688d648}</Project>
+      <Name>LivrariaDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -262,7 +298,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50583</DevelopmentServerPort>
+          <DevelopmentServerPort>50667</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44307/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -25,8 +25,21 @@
     $scope.CriaAutor = function () {
         $("#NovoAutor").modal('show');
     }
+    $scope.AlteraAutor = function (vcodigo, vnome) {
+        var autorData = {
+            Codigo: vcodigo,
+            Nome:   vnome
+        };
+
+        $("#AlteraAutor").modal('show');
+    }
+
+
     $scope.CloseNovoAutor = function () {
         $("#NovoAutor").modal('hide');
+    }
+    $scope.CloseAlteraAutor = function () {
+        $("#AlteraAutor").modal('hide');
     }
 
     var absUrl = $location.absUrl();
@@ -55,10 +68,38 @@
         })
     }
 
+    $scope.AlteraDadosAutor = function () {
+        var autorData = {
+            Codigo: $scope.codigo,
+            Nome: $scope.Nome
+        };
+
+        $http({
+            method: 'POST',
+            url: 'Autor/Update',
+            data: autorData,
+            dataType: 'json',
+            headers: { "Content-Type": "application/json" }
+        }).then(function successCallback(response) {
+            $scope.CloseAlteraAutor();
+            $scope.CarregarTodos();
+        }, function errorCallback(response) {
+
+            $scope.error = "Erro ao obter autores";
+        })
+    }
+
     $('#add-form').on('submit', function (e) {
+        e.preventDefault();
+        $scope.AlteraDadosAutor();
+    });
+
+    $('#update-form').on('submit', function (e) {
         e.preventDefault();
         $scope.AdicionaNovoAutor();
     });
+
+
 
     //Fill the employee records for update
 

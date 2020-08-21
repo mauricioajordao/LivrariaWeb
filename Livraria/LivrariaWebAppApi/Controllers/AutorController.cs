@@ -84,19 +84,17 @@ namespace LivrariaWebAppApi.Controllers
         }
 
         // GET: Autor/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int Codigo,string Nome)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            autor autor = db.autors.Find(id);
+           
+            autor autor = db.autors.Find(Codigo);
             if (autor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.codA = new SelectList(db.livro_autor, "id", "id", autor.codA);
-            return View(autor);
+            autor.nome = Nome;
+            db.SaveChanges();
+            return View();
         }
 
         // POST: Autor/Edit/5

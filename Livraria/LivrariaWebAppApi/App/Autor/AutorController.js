@@ -22,24 +22,43 @@
         })
     };
 
+    $scope.CriaAutor = function () {
+        $("#NovoAutor").modal('show');
+    }
+    $scope.CloseNovoAutor = function () {
+        $("#NovoAutor").modal('hide');
+    }
+
     var absUrl = $location.absUrl();
     
     if (absUrl.indexOf("/Autor/") < 0) {
         $scope.CarregarTodos();
     };
     
-    $scope.Add = function () {
-        var employeeData = {
-            Nome: $scope.Nome,
+    $scope.AdicionaNovoAutor = function () {
+        var autorData = {
+            Nome: $scope.Nome
         };
-        debugger;
-        $http.post("Autor", employeeData).success(function (data) {
-            $location.path('/Index');
-        }).error(function (data) {
-            console.log(data);
-            $scope.error = "Erro: " + data.ExceptionMessage;
-        });
+
+        $http({
+            method: 'POST',
+            url: 'Autor/Create',
+            data: autorData,
+            dataType: 'json',
+            headers: { "Content-Type": "application/json" }
+        }).then(function successCallback(response) {
+            $scope.CloseNovoAutor();
+            $scope.CarregarTodos();
+        }, function errorCallback(response) {
+
+            $scope.error = "Erro ao obter autores";
+        })
     }
+
+    $('#add-form').on('submit', function (e) {
+        e.preventDefault();
+        $scope.AdicionaNovoAutor();
+    });
 
     //Fill the employee records for update
 

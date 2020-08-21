@@ -27,19 +27,19 @@
   </EntityType>
   <EntityType Name="livro_assunto">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="livro_codl" />
+      <PropertyRef Name="assunto_codAS" />
     </Key>
-    <Property Name="livro_codl" Type="int" />
-    <Property Name="assunto_codAS" Type="int" />
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="livro_codl" Type="int" Nullable="false" />
+    <Property Name="assunto_codAS" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="livro_autor">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="livro_codL" />
+      <PropertyRef Name="autor_coda" />
     </Key>
-    <Property Name="livro_codL" Type="int" />
-    <Property Name="autor_coda" Type="int" />
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="livro_codL" Type="int" Nullable="false" />
+    <Property Name="autor_coda" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'LivrariaDB.dbo.Vw_Livros' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -68,18 +68,6 @@ warning 6002: The table/view 'LivrariaDB.dbo.Vw_Livros' does not have a primary 
     <Property Name="codA" Type="int" Nullable="false" />
     <Property Name="nome" Type="varchar" MaxLength="40" />
   </EntityType>
-  <Association Name="FK_livro_autor_autor1">
-    <End Role="autor" Type="Self.autor" Multiplicity="1" />
-    <End Role="livro_autor" Type="Self.livro_autor" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="autor">
-        <PropertyRef Name="codA" />
-      </Principal>
-      <Dependent Role="livro_autor">
-        <PropertyRef Name="id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="LivrariaDBModelStoreContainer">
     <EntitySet Name="assunto" EntityType="Self.assunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="autor" EntityType="Self.autor" Schema="dbo" store:Type="Tables" />
@@ -106,9 +94,5 @@ warning 6002: The table/view 'LivrariaDB.dbo.Vw_Livros' does not have a primary 
     [Vw_Livros].[nome] AS [nome]
     FROM [dbo].[Vw_Livros] AS [Vw_Livros]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK_livro_autor_autor1" Association="Self.FK_livro_autor_autor1">
-      <End Role="autor" EntitySet="autor" />
-      <End Role="livro_autor" EntitySet="livro_autor" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

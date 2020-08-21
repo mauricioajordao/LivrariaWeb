@@ -32,7 +32,6 @@
     <EntitySetMapping Name="livro_assunto">
       <EntityTypeMapping TypeName="LivrariaDBModel.livro_assunto">
         <MappingFragment StoreEntitySet="livro_assunto">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="assunto_codAS" ColumnName="assunto_codAS" />
           <ScalarProperty Name="livro_codl" ColumnName="livro_codl" />
         </MappingFragment>
@@ -41,7 +40,6 @@
     <EntitySetMapping Name="livro_autor">
       <EntityTypeMapping TypeName="LivrariaDBModel.livro_autor">
         <MappingFragment StoreEntitySet="livro_autor">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="autor_coda" ColumnName="autor_coda" />
           <ScalarProperty Name="livro_codL" ColumnName="livro_codL" />
         </MappingFragment>

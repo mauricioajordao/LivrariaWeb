@@ -14,8 +14,7 @@ namespace LivrariaDAL
     
     public partial class livro_assunto
     {
-        public Nullable<int> livro_codl { get; set; }
-        public Nullable<int> assunto_codAS { get; set; }
-        public int id { get; set; }
+        public int livro_codl { get; set; }
+        public int assunto_codAS { get; set; }
     }
 }

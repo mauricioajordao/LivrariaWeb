@@ -75,10 +75,12 @@ namespace LivrariaWebAppApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create( Autorview autor)
+       
+        public ActionResult Create( string Nome)
         {
-            return View(autor);
+            db.autors.Add(new autor() { nome = Nome });
+            db.SaveChanges();
+            return View();
         }
 
         // GET: Autor/Edit/5

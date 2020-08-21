@@ -7,10 +7,6 @@
     <EntitySet Name="livro_assunto" EntityType="LivrariaDBModel.livro_assunto" />
     <EntitySet Name="livro_autor" EntityType="LivrariaDBModel.livro_autor" />
     <EntitySet Name="Vw_Livros" EntityType="LivrariaDBModel.Vw_Livros" />
-    <AssociationSet Name="FK_livro_autor_autor1" Association="LivrariaDBModel.FK_livro_autor_autor1">
-      <End Role="autor" EntitySet="autors" />
-      <End Role="livro_autor" EntitySet="livro_autor" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="assunto">
     <Key>
@@ -25,7 +21,6 @@
     </Key>
     <Property Name="codA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="livro_autor" Relationship="LivrariaDBModel.FK_livro_autor_autor1" FromRole="autor" ToRole="livro_autor" />
   </EntityType>
   <EntityType Name="Livro">
     <Key>
@@ -40,20 +35,19 @@
   </EntityType>
   <EntityType Name="livro_assunto">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="livro_codl" />
+      <PropertyRef Name="assunto_codAS" />
     </Key>
-    <Property Name="livro_codl" Type="Int32" />
-    <Property Name="assunto_codAS" Type="Int32" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="livro_codl" Type="Int32" Nullable="false" />
+    <Property Name="assunto_codAS" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="livro_autor">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="livro_codL" />
+      <PropertyRef Name="autor_coda" />
     </Key>
-    <Property Name="livro_codL" Type="Int32" />
-    <Property Name="autor_coda" Type="Int32" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="autor" Relationship="LivrariaDBModel.FK_livro_autor_autor1" FromRole="livro_autor" ToRole="autor" />
+    <Property Name="livro_codL" Type="Int32" Nullable="false" />
+    <Property Name="autor_coda" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Vw_Livros">
     <Key>
@@ -80,16 +74,4 @@
     <Property Name="codA" Type="Int32" Nullable="false" />
     <Property Name="nome" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
   </EntityType>
-  <Association Name="FK_livro_autor_autor1">
-    <End Type="LivrariaDBModel.autor" Role="autor" Multiplicity="1" />
-    <End Type="LivrariaDBModel.livro_autor" Role="livro_autor" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="autor">
-        <PropertyRef Name="codA" />
-      </Principal>
-      <Dependent Role="livro_autor">
-        <PropertyRef Name="id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

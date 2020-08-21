@@ -14,10 +14,7 @@ namespace LivrariaDAL
     
     public partial class livro_autor
     {
-        public Nullable<int> livro_codL { get; set; }
-        public Nullable<int> autor_coda { get; set; }
-        public int id { get; set; }
-    
-        public virtual autor autor { get; set; }
+        public int livro_codL { get; set; }
+        public int autor_coda { get; set; }
     }
 }

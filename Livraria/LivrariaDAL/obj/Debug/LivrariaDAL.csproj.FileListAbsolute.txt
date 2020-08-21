@@ -17,8 +17,8 @@ D:\ProjetosGit\Livraria\LivrariaDAL\bin\Debug\EntityFramework.dll
 D:\ProjetosGit\Livraria\LivrariaDAL\bin\Debug\EntityFramework.SqlServer.dll
 D:\ProjetosGit\Livraria\LivrariaDAL\bin\Debug\EntityFramework.xml
 D:\ProjetosGit\Livraria\LivrariaDAL\bin\Debug\EntityFramework.SqlServer.xml
-D:\ProjetosGit\Livraria\LivrariaDAL\obj\Debug\LivrariaDAL.csprojAssemblyReference.cache
 D:\ProjetosGit\Livraria\LivrariaDAL\obj\Debug\LivrariaDAL.csproj.CoreCompileInputs.cache
 D:\ProjetosGit\Livraria\LivrariaDAL\obj\Debug\LivrariaDAL.csproj.CopyComplete
 D:\ProjetosGit\Livraria\LivrariaDAL\obj\Debug\LivrariaDAL.dll
 D:\ProjetosGit\Livraria\LivrariaDAL\obj\Debug\LivrariaDAL.pdb
+D:\ProjetosGit\Livraria\LivrariaDAL\obj\Debug\LivrariaDAL.csprojAssemblyReference.cache

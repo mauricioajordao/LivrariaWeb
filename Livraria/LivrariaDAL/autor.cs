@@ -16,7 +16,5 @@ namespace LivrariaDAL
     {
         public int codA { get; set; }
         public string nome { get; set; }
-    
-        public virtual livro_autor livro_autor { get; set; }
     }
 }

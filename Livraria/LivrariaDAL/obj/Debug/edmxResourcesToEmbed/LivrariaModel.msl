@@ -29,22 +29,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="livro_assunto">
-      <EntityTypeMapping TypeName="LivrariaDBModel.livro_assunto">
-        <MappingFragment StoreEntitySet="livro_assunto">
-          <ScalarProperty Name="assunto_codAS" ColumnName="assunto_codAS" />
-          <ScalarProperty Name="livro_codl" ColumnName="livro_codl" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="livro_autor">
-      <EntityTypeMapping TypeName="LivrariaDBModel.livro_autor">
-        <MappingFragment StoreEntitySet="livro_autor">
-          <ScalarProperty Name="autor_coda" ColumnName="autor_coda" />
-          <ScalarProperty Name="livro_codL" ColumnName="livro_codL" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Vw_Livros">
       <EntityTypeMapping TypeName="LivrariaDBModel.Vw_Livros">
         <MappingFragment StoreEntitySet="Vw_Livros">
@@ -67,5 +51,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="livro_assunto" TypeName="LivrariaDBModel.livro_assunto" StoreEntitySet="livro_assunto">
+      <EndProperty Name="Livro">
+        <ScalarProperty Name="codL" ColumnName="livro_codl" />
+      </EndProperty>
+      <EndProperty Name="assunto">
+        <ScalarProperty Name="codAS" ColumnName="assunto_codAS" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="livro_autor" TypeName="LivrariaDBModel.livro_autor" StoreEntitySet="livro_autor">
+      <EndProperty Name="Livro">
+        <ScalarProperty Name="codL" ColumnName="livro_codL" />
+      </EndProperty>
+      <EndProperty Name="autor">
+        <ScalarProperty Name="codA" ColumnName="autor_coda" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

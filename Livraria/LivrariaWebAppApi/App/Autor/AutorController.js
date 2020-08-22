@@ -1,6 +1,13 @@
-﻿app.controller("AutorController", ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
+﻿app.controller("AutorController", ['$scope', '$http', '$location', '$routeParams', '$mdDialog', 'orderByFilter',
+    function ($scope, $http, $location, $routeParams, $mdDialog, orderBy) {
     $scope.ListOfEmployee;
     $scope.Status;
+    $scope.OrdemLista = 'Codigo';
+    $scope.OrdemListaRev = false;
+
+
+
+
 
     $scope.Close = function () {
         $location.path('/');
@@ -15,7 +22,8 @@
             url: 'Autor/GetAll'
         }).then(function successCallback(response) {
             $scope.ListOfEmployee = response.data;
-
+            $scope.OrdenaAutores($scope.OrdemLista);
+ 
         }, function errorCallback(response) {
 
             $scope.error = "Erro ao obter autores";
@@ -24,6 +32,7 @@
 
     $scope.CriaAutor = function () {
         $("#NovoAutor").modal('show');
+        
     }
     $scope.AlteraAutor = function (vcodigo, vnome) {
         var autorData = {
@@ -42,11 +51,9 @@
         $("#AlteraAutor").modal('hide');
     }
 
-    var absUrl = $location.absUrl();
+      
+     $scope.CarregarTodos();
     
-    if (absUrl.indexOf("/Autor/") < 0) {
-        $scope.CarregarTodos();
-    };
     
     $scope.AdicionaNovoAutor = function () {
         var autorData = {
@@ -60,13 +67,37 @@
             dataType: 'json',
             headers: { "Content-Type": "application/json" }
         }).then(function successCallback(response) {
+            $scope.Mensagem(response.Mensagem);
             $scope.CloseNovoAutor();
             $scope.CarregarTodos();
+            $scope.Nome = "";
+
+
         }, function errorCallback(response) {
 
             $scope.error = "Erro ao obter autores";
         })
     }
+
+    $scope.OrdenaAutores = function (ordem) {
+        $scope.OrdemLista = ordem;
+        $scope.ListOfEmployee = orderBy($scope.ListOfEmployee, $scope.OrdemLista, $scope.OrdemListaRev);
+      
+
+    };
+
+    $scope.Mensagem = function (msg) {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#DialogMensagem')))
+                .clickOutsideToClose(true)
+                .title('Mensagem')
+                .textContent(msg)
+                .ariaLabel('Mensagem')
+                .ok('OK')
+               
+        );
+    };
 
     $scope.AlteraDadosAutor = function () {
         var autorData = {
@@ -83,6 +114,7 @@
         }).then(function successCallback(response) {
             $scope.CloseAlteraAutor();
             $scope.CarregarTodos();
+            $scope.$parent.$location.reload();
         }, function errorCallback(response) {
 
             $scope.error = "Erro ao obter autores";
@@ -91,7 +123,7 @@
 
     $('#add-form').on('submit', function (e) {
         e.preventDefault();
-        $scope.AlteraDadosAutor();
+        $scope.AdicionaNovoAutor();
     });
 
     $('#update-form').on('submit', function (e) {

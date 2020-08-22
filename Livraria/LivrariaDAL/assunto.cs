@@ -14,7 +14,16 @@ namespace LivrariaDAL
     
     public partial class assunto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public assunto()
+        {
+            this.Livroes = new HashSet<Livro>();
+        }
+    
         public int codAS { get; set; }
         public string descricao { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Livro> Livroes { get; set; }
     }
 }

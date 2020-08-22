@@ -14,7 +14,16 @@ namespace LivrariaDAL
     
     public partial class autor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public autor()
+        {
+            this.Livroes = new HashSet<Livro>();
+        }
+    
         public int codA { get; set; }
         public string nome { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Livro> Livroes { get; set; }
     }
 }

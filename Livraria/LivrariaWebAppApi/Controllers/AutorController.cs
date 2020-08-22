@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using LivrariaDAL;
 
@@ -15,6 +16,11 @@ namespace LivrariaWebAppApi.Controllers
         public int Codigo;
         public string Nome;
 
+    }
+    public class ObjetoRetorno
+    {
+        public int Status;
+        public String Mensagem;
     }
 
     public class AutorController : Controller
@@ -37,15 +43,9 @@ namespace LivrariaWebAppApi.Controllers
             foreach (var item in db.autors.ToList()) {
 
                 retorno.Add(new Autorview() { Codigo = item.codA, Nome = item.nome });
-            
-            
-            
-            
-            }
-                             
-         
-            return Json( retorno,  JsonRequestBehavior.AllowGet);
-                
+      
+            }                               
+            return Json( retorno,  JsonRequestBehavior.AllowGet);              
         }
 
 
@@ -78,9 +78,26 @@ namespace LivrariaWebAppApi.Controllers
        
         public ActionResult Create( string Nome)
         {
-            db.autors.Add(new autor() { nome = Nome });
-            db.SaveChanges();
-            return View();
+            try
+            {
+                db.autors.Add(new autor() { nome = Nome });
+                db.SaveChanges();
+               
+            }
+            catch(Exception e)
+            {
+                db.autors.Add(new autor() { nome = Nome });
+                db.SaveChanges();
+                return Json(
+                    new ObjetoRetorno()
+                    { Status = -1, Mensagem = e.Message }
+                    , JsonRequestBehavior.AllowGet);
+            }
+            return Json(
+                   new ObjetoRetorno()
+                   { Status = 0, Mensagem = "Autor Incluido com Sucesso" }
+                   , JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: Autor/Edit/5
@@ -110,7 +127,7 @@ namespace LivrariaWebAppApi.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.codA = new SelectList(db.livro_autor, "id", "id", autor.codA);
+ 
             return View(autor);
         }
 

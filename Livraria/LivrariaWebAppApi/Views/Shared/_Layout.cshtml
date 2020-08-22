@@ -6,8 +6,45 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .dialogdemoBasicUsage #popupContainer {
+            position: relative;
+        }
+
+        .dialogdemoBasicUsage .footer {
+            width: 100%;
+            text-align: center;
+            margin-left: 20px;
+        }
+
+            .dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+                font-size: 0.8em;
+                margin-top: 50px;
+            }
+
+        .dialogdemoBasicUsage button {
+            width: 200px;
+        }
+
+        .dialogdemoBasicUsage div#status {
+            color: #c60008;
+        }
+
+        .dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+            margin-bottom: 0;
+        }
+    </style>
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-cookies.js"></script>
+    <script src="~/Scripts/angular-aria.js"></script>
+    <script src="~/Scripts/angular-filters.js"></script>
+    <script src="~/Scripts/angular-resource.js"></script>
+    <script src="~/Scripts/Pagination.js"></script>
+    <script src="~/Scripts/angular-sanitize.js"></script>
     <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="~/Scripts/angular-filters.js"></script>
+    <script src="~/Scripts/angular-material.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
     <script src="~/App/LivrariaApp.js"></script>
 </head>
@@ -38,8 +75,8 @@
     </div>   
     <div class="container body-content">
         @RenderBody()
+        <div id="DialogMensagem" class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center"></div>
         <hr />
- 
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>

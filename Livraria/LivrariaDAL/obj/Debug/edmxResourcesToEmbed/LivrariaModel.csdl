@@ -4,9 +4,15 @@
     <EntitySet Name="assuntoes" EntityType="LivrariaDBModel.assunto" />
     <EntitySet Name="autors" EntityType="LivrariaDBModel.autor" />
     <EntitySet Name="Livroes" EntityType="LivrariaDBModel.Livro" />
-    <EntitySet Name="livro_assunto" EntityType="LivrariaDBModel.livro_assunto" />
-    <EntitySet Name="livro_autor" EntityType="LivrariaDBModel.livro_autor" />
     <EntitySet Name="Vw_Livros" EntityType="LivrariaDBModel.Vw_Livros" />
+    <AssociationSet Name="livro_assunto" Association="LivrariaDBModel.livro_assunto">
+      <End Role="assunto" EntitySet="assuntoes" />
+      <End Role="Livro" EntitySet="Livroes" />
+    </AssociationSet>
+    <AssociationSet Name="livro_autor" Association="LivrariaDBModel.livro_autor">
+      <End Role="autor" EntitySet="autors" />
+      <End Role="Livro" EntitySet="Livroes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="assunto">
     <Key>
@@ -14,6 +20,7 @@
     </Key>
     <Property Name="codAS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Livroes" Relationship="LivrariaDBModel.livro_assunto" FromRole="assunto" ToRole="Livro" />
   </EntityType>
   <EntityType Name="autor">
     <Key>
@@ -21,6 +28,7 @@
     </Key>
     <Property Name="codA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Livroes" Relationship="LivrariaDBModel.livro_autor" FromRole="autor" ToRole="Livro" />
   </EntityType>
   <EntityType Name="Livro">
     <Key>
@@ -32,22 +40,8 @@
     <Property Name="edicao" Type="Int32" />
     <Property Name="anopublicao" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
     <Property Name="preco" Type="Decimal" Precision="12" Scale="2" />
-  </EntityType>
-  <EntityType Name="livro_assunto">
-    <Key>
-      <PropertyRef Name="livro_codl" />
-      <PropertyRef Name="assunto_codAS" />
-    </Key>
-    <Property Name="livro_codl" Type="Int32" Nullable="false" />
-    <Property Name="assunto_codAS" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="livro_autor">
-    <Key>
-      <PropertyRef Name="livro_codL" />
-      <PropertyRef Name="autor_coda" />
-    </Key>
-    <Property Name="livro_codL" Type="Int32" Nullable="false" />
-    <Property Name="autor_coda" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="assuntoes" Relationship="LivrariaDBModel.livro_assunto" FromRole="Livro" ToRole="assunto" />
+    <NavigationProperty Name="autors" Relationship="LivrariaDBModel.livro_autor" FromRole="Livro" ToRole="autor" />
   </EntityType>
   <EntityType Name="Vw_Livros">
     <Key>
@@ -74,4 +68,12 @@
     <Property Name="codA" Type="Int32" Nullable="false" />
     <Property Name="nome" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
   </EntityType>
+  <Association Name="livro_assunto">
+    <End Type="LivrariaDBModel.assunto" Role="assunto" Multiplicity="*" />
+    <End Type="LivrariaDBModel.Livro" Role="Livro" Multiplicity="*" />
+  </Association>
+  <Association Name="livro_autor">
+    <End Type="LivrariaDBModel.autor" Role="autor" Multiplicity="*" />
+    <End Type="LivrariaDBModel.Livro" Role="Livro" Multiplicity="*" />
+  </Association>
 </Schema>

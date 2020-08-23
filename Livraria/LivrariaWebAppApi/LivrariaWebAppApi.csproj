@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -170,12 +171,43 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Livros.cs">
+    <Compile Include="Models\assunto.cs">
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\autor.cs">
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LivrariaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Livros.rpt</DependentUpon>
+      <DependentUpon>LivrariaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LivrariaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LivrariaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LivrariaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Livro.cs">
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vw_Livros.cs">
+      <DependentUpon>LivrariaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\AutorReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutorReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +235,16 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\LivrariaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LivrariaModel.edmx</DependentUpon>
+      <LastGenOutput>LivrariaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LivrariaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LivrariaModel.edmx</DependentUpon>
+      <LastGenOutput>LivrariaModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -273,6 +315,13 @@
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-local-storage.min.js.map" />
+    <EntityDeploy Include="Models\LivrariaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LivrariaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LivrariaModel.edmx.diagram">
+      <DependentUpon>LivrariaModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -301,7 +350,6 @@
   <ItemGroup>
     <Folder Include="App\Livro\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -333,18 +381,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LivrariaDAL\LivrariaDAL.csproj">
-      <Project>{48765b23-141b-47c4-8bad-3c2f1688d648}</Project>
-      <Name>LivrariaDAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\Livros.rpt">
+    <EmbeddedResource Include="Reports\AutorReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Livros.cs</LastGenOutput>
+      <LastGenOutput>AutorReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

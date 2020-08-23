@@ -16,14 +16,14 @@ namespace LivrariaWebAppApi.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Livros : ReportClass {
+    public class AutorReport : ReportClass {
         
-        public Livros() {
+        public AutorReport() {
         }
         
         public override string ResourceName {
             get {
-                return "Livros.rpt";
+                return "AutorReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace LivrariaWebAppApi.Reports {
         
         public override string FullResourceName {
             get {
-                return "LivrariaWebAppApi.Reports.Livros.rpt";
+                return "LivrariaWebAppApi.Reports.AutorReport.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace LivrariaWebAppApi.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedLivros : Component, ICachedReport {
+    public class CachedAutorReport : Component, ICachedReport {
         
-        public CachedLivros() {
+        public CachedAutorReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace LivrariaWebAppApi.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Livros rpt = new Livros();
+            AutorReport rpt = new AutorReport();
             rpt.Site = this.Site;
             return rpt;
         }

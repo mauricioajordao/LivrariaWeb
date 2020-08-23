@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LivrariaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="assunto">
+    <Key>
+      <PropertyRef Name="codAS" />
+    </Key>
+    <Property Name="codAS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descricao" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="autor">
+    <Key>
+      <PropertyRef Name="codA" />
+    </Key>
+    <Property Name="codA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="Livro">
+    <Key>
+      <PropertyRef Name="codL" />
+    </Key>
+    <Property Name="codL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="40" />
+    <Property Name="editora" Type="varchar" MaxLength="40" />
+    <Property Name="edicao" Type="int" />
+    <Property Name="anopublicao" Type="varchar" MaxLength="4" />
+    <Property Name="preco" Type="decimal" Precision="12" Scale="2" />
+  </EntityType>
+  <EntityType Name="livro_assunto">
+    <Key>
+      <PropertyRef Name="livro_codl" />
+      <PropertyRef Name="assunto_codAS" />
+    </Key>
+    <Property Name="livro_codl" Type="int" Nullable="false" />
+    <Property Name="assunto_codAS" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="livro_autor">
+    <Key>
+      <PropertyRef Name="livro_codL" />
+      <PropertyRef Name="autor_coda" />
+    </Key>
+    <Property Name="livro_codL" Type="int" Nullable="false" />
+    <Property Name="autor_coda" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LivrariaDB.dbo.Vw_Livros' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Vw_Livros">
+    <Key>
+      <PropertyRef Name="codL" />
+      <PropertyRef Name="id" />
+      <PropertyRef Name="codAS" />
+      <PropertyRef Name="Expr2" />
+      <PropertyRef Name="codA" />
+    </Key>
+    <Property Name="codL" Type="int" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="40" />
+    <Property Name="editora" Type="varchar" MaxLength="40" />
+    <Property Name="edicao" Type="int" />
+    <Property Name="anopublicao" Type="varchar" MaxLength="4" />
+    <Property Name="preco" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="livro_codl" Type="int" />
+    <Property Name="assunto_codAS" Type="int" />
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="codAS" Type="int" Nullable="false" />
+    <Property Name="descricao" Type="varchar" MaxLength="20" />
+    <Property Name="Expr1" Type="int" />
+    <Property Name="autor_coda" Type="int" />
+    <Property Name="Expr2" Type="int" Nullable="false" />
+    <Property Name="codA" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <Association Name="FK_livro_assunto_assunto">
+    <End Role="assunto" Type="Self.assunto" Multiplicity="1" />
+    <End Role="livro_assunto" Type="Self.livro_assunto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="assunto">
+        <PropertyRef Name="codAS" />
+      </Principal>
+      <Dependent Role="livro_assunto">
+        <PropertyRef Name="assunto_codAS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_livro_assunto_Livro">
+    <End Role="Livro" Type="Self.Livro" Multiplicity="1" />
+    <End Role="livro_assunto" Type="Self.livro_assunto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livro">
+        <PropertyRef Name="codL" />
+      </Principal>
+      <Dependent Role="livro_assunto">
+        <PropertyRef Name="livro_codl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_livro_autor_autor">
+    <End Role="autor" Type="Self.autor" Multiplicity="1" />
+    <End Role="livro_autor" Type="Self.livro_autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="autor">
+        <PropertyRef Name="codA" />
+      </Principal>
+      <Dependent Role="livro_autor">
+        <PropertyRef Name="autor_coda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_livro_autor_livro">
+    <End Role="Livro" Type="Self.Livro" Multiplicity="1" />
+    <End Role="livro_autor" Type="Self.livro_autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livro">
+        <PropertyRef Name="codL" />
+      </Principal>
+      <Dependent Role="livro_autor">
+        <PropertyRef Name="livro_codL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LivrariaDBModelStoreContainer">
+    <EntitySet Name="assunto" EntityType="Self.assunto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="autor" EntityType="Self.autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Livro" EntityType="Self.Livro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="livro_assunto" EntityType="Self.livro_assunto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="livro_autor" EntityType="Self.livro_autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vw_Livros" EntityType="Self.Vw_Livros" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_Livros].[codL] AS [codL], 
+    [Vw_Livros].[titulo] AS [titulo], 
+    [Vw_Livros].[editora] AS [editora], 
+    [Vw_Livros].[edicao] AS [edicao], 
+    [Vw_Livros].[anopublicao] AS [anopublicao], 
+    [Vw_Livros].[preco] AS [preco], 
+    [Vw_Livros].[livro_codl] AS [livro_codl], 
+    [Vw_Livros].[assunto_codAS] AS [assunto_codAS], 
+    [Vw_Livros].[id] AS [id], 
+    [Vw_Livros].[codAS] AS [codAS], 
+    [Vw_Livros].[descricao] AS [descricao], 
+    [Vw_Livros].[Expr1] AS [Expr1], 
+    [Vw_Livros].[autor_coda] AS [autor_coda], 
+    [Vw_Livros].[Expr2] AS [Expr2], 
+    [Vw_Livros].[codA] AS [codA], 
+    [Vw_Livros].[nome] AS [nome]
+    FROM [dbo].[Vw_Livros] AS [Vw_Livros]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_livro_assunto_assunto" Association="Self.FK_livro_assunto_assunto">
+      <End Role="assunto" EntitySet="assunto" />
+      <End Role="livro_assunto" EntitySet="livro_assunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_livro_assunto_Livro" Association="Self.FK_livro_assunto_Livro">
+      <End Role="Livro" EntitySet="Livro" />
+      <End Role="livro_assunto" EntitySet="livro_assunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_livro_autor_autor" Association="Self.FK_livro_autor_autor">
+      <End Role="autor" EntitySet="autor" />
+      <End Role="livro_autor" EntitySet="livro_autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_livro_autor_livro" Association="Self.FK_livro_autor_livro">
+      <End Role="Livro" EntitySet="Livro" />
+      <End Role="livro_autor" EntitySet="livro_autor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

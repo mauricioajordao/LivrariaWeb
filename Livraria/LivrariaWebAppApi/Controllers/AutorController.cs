@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using LivrariaDAL;
+using CrystalDecisions.CrystalReports.Engine;
+using LivrariaWebAppApi.Models;
 
 namespace LivrariaWebAppApi.Controllers
 {
@@ -25,16 +27,40 @@ namespace LivrariaWebAppApi.Controllers
 
     public class AutorController : Controller
     {
-        public LivrariaDBEntities db = new LivrariaDBEntities();
+        public LivrariaDBEntities db { get; private set; }
+
+
 
         // GET: Autor
+
+        public AutorController() : this(new LivrariaDBEntities()) { }
+ 
+        public AutorController(LivrariaDBEntities Db)
+        { }
+
+        [HttpGet, ActionName("Report")]
+        public ActionResult Report()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "AutorReport.rpt"));
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            List<autor> ListaAutores = db.autors.ToList();
+            
+            rd.SetDataSource(ListaAutores);
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "AutorReport.pdf");
+        }
         public ActionResult Index()
         {
             return View();
         }
         
-
-
 
         public ActionResult GetAll()
         {
@@ -49,32 +75,8 @@ namespace LivrariaWebAppApi.Controllers
         }
 
 
-        // GET: Autor/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            autor autor = db.autors.Find(id);
-            if (autor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(autor);
-        }
-
-        // GET: Autor/Create
-        public ActionResult Create()
-        {
-            
-            return View();
-        }
-
-        // POST: Autor/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+ 
+        [HttpPost, ActionName("Create")]
        
         public ActionResult Create( string Nome)
         {
@@ -86,9 +88,7 @@ namespace LivrariaWebAppApi.Controllers
             }
             catch(Exception e)
             {
-                db.autors.Add(new autor() { nome = Nome });
-                db.SaveChanges();
-                return Json(
+                   return Json(
                     new ObjetoRetorno()
                     { Status = -1, Mensagem = e.Message }
                     , JsonRequestBehavior.AllowGet);
@@ -100,70 +100,56 @@ namespace LivrariaWebAppApi.Controllers
 
         }
 
-        // GET: Autor/Edit/5
-        public ActionResult Edit(int Codigo,string Nome)
+        [HttpPost , ActionName("Update")]
+        public ActionResult Update(int Codigo, string Nome)
         {
-           
-            autor autor = db.autors.Find(Codigo);
-            if (autor == null)
+            try
             {
-                return HttpNotFound();
-            }
-            autor.nome = Nome;
-            db.SaveChanges();
-            return View();
-        }
-
-        // POST: Autor/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "codA,nome")] autor autor)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(autor).State = EntityState.Modified;
+                autor vautor = db.autors.Find(Codigo);
+                vautor.nome = Nome;
+                db.Entry(vautor).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
             }
- 
-            return View(autor);
+            catch (Exception e)
+            {
+                return Json(
+                    new ObjetoRetorno()
+                    { Status = -1, Mensagem = e.Message }
+                    , JsonRequestBehavior.AllowGet);
+            }
+            return Json(
+                   new ObjetoRetorno()
+                   { Status = 0, Mensagem = "Autor Alterado com Sucesso" }
+                   , JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Autor/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            autor autor = db.autors.Find(id);
-            if (autor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(autor);
-        }
 
-        // POST: Autor/Delete/5
+        
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int Codigo)
         {
-            autor autor = db.autors.Find(id);
-            db.autors.Remove(autor);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                var vautor = db.autors.Find(Codigo);
+                db.autors.Remove(vautor);
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                return Json(
+                    new ObjetoRetorno()
+                    { Status = -1, Mensagem = e.Message }
+                    , JsonRequestBehavior.AllowGet);
+            }
+            return Json(
+                   new ObjetoRetorno()
+                   { Status = 0, Mensagem = "Autor Excluido com Sucesso" }
+                   , JsonRequestBehavior.AllowGet);
+
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
     }
 }

@@ -1,90 +1,142 @@
-﻿app.controller("EmployeeController", ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
-    $scope.ListOfEmployee;
-    $scope.Status;
+﻿app.controller("AssuntoController", ['$scope', '$http', '$location', '$routeParams', '$mdDialog', 'orderByFilter',
+    function ($scope, $http, $location, $routeParams, $mdDialog, orderBy) {
 
-    $scope.Close = function () {
-        $location.path('/EmployeeList');
-    }
-
-    //Get all employee and bind with html table
-    $http.get("api/employee/GetAllEmployee").success(function (data) {
-        $scope.ListOfEmployee = data;
-
-    })
-        .error(function (data) {
-            $scope.Status = "data not found";
-        });
-
-    //Add new employee
-    $scope.Add = function () {
-        var employeeData = {
-            FirstName: $scope.FirstName,
-            LastName: $scope.LastName,
-            Address: $scope.Address,
-            Salary: $scope.Salary,
-            DOB: $scope.DOB,
-            // DepartmentID: $scope.DepartmentID
-        };
-        debugger;
-        $http.post("api/employee/AddEmployee", employeeData).success(function (data) {
-            $location.path('/EmployeeList');
-        }).error(function (data) {
-            console.log(data);
-            $scope.error = "Something wrong when adding new employee " + data.ExceptionMessage;
-        });
-    }
-
-    //Fill the employee records for update
-
-    if ($routeParams.empId) {
-        $scope.Id = $routeParams.empId;
-
-        $http.get('api/employee/GetEmployee/' + $scope.Id).success(function (data) {
-            $scope.FirstName = data.FirstName;
-            $scope.LastName = data.LastName;
-            $scope.Address = data.Address;
-            $scope.Salary = data.Salary;
-            $scope.DOB = data.DOB
-            //$scope.DepartmentID = data.DepartmentID
-        });
-
-    }
-
-    //Update the employee records
-    $scope.Update = function () {
-        debugger;
-        var employeeData = {
-            EmployeeID: $scope.Id,
-            FirstName: $scope.FirstName,
-            LastName: $scope.LastName,
-            Address: $scope.Address,
-            Salary: $scope.Salary,
-            DOB: $scope.DOB
-            //DepartmentID: $scope.DepartmentID
-        };
-        if ($scope.Id > 0) {
-
-            $http.put("api/employee/UpdateEmployee", employeeData).success(function (data) {
-                $location.path('/EmployeeList');
-            }).error(function (data) {
-                console.log(data);
-                $scope.error = "Something wrong when adding updating employee " + data.ExceptionMessage;
-            });
+        $scope.ListaAssuntoes;
+        $scope.Status;
+        $scope.OrdemLista = 'Codigo';
+        $scope.OrdemListaRev = false;
+        $scope.Close = function () {
+            $location.path('/');
         }
-    }
+        $scope.LimpaDados = function () {
+            $scope.AssuntoData = {
+                Codigo: 0,
+                Descricao: ""
+            };
+            $scope.apply();
+        };
+        //Get all employee and bind with html table
+        $scope.CarregarTodos = function () {
 
+            $http({
+                method: 'GET',
+                url: 'Assunto/GetAll'
+            }).then(function successCallback(response) {
+                $scope.ListaAssuntoes = response.data;
+                $scope.OrdenaAssuntoes($scope.OrdemLista);
+                $scope.LimpaDados();
 
-    //Delete the selected employee from the list
-    $scope.Delete = function () {
-        if ($scope.Id > 0) {
+            }, function errorCallback(response) {
 
-            $http.delete("api/employee/DeleteEmployee/" + $scope.Id).success(function (data) {
-                $location.path('/EmployeeList');
-            }).error(function (data) {
-                console.log(data);
-                $scope.error = "Something wrong when adding Deleting employee " + data.ExceptionMessage;
-            });
+                $scope.error = "Erro ao obter Assuntoes";
+            })
+        };
+        $scope.CriaAssunto = function () {
+            $("#inputcodigo").val("");
+            $("#inputDescricao").val("");
+            $("#NovoAssunto").modal('show');
+            $scope.LimpaDados();
+
+        }
+        $scope.AlteraAssunto = function (vcodigo, vDescricao) {
+
+            $scope.AssuntoData.Codigo = vcodigo;
+            $scope.AssuntoData.Descricao = vDescricao;
+
+            $("#inputcodigo").val(vcodigo);
+            $("#inputDescricao").val(vDescricao);
+            $("#AlteraAssunto").modal('show');
+        }
+        $scope.CloseNovoAssunto = function () {
+            $("#NovoAssunto").modal('hide');
+        }
+        $scope.CloseAlteraAssunto = function () {
+            $("#AlteraAssunto").modal('hide');
         }
 
+
+        $scope.CarregarTodos();
+
+        $scope.DeleteAssunto = function (codigo) {
+            var AssuntoData = {
+                Codigo: codigo
+            };
+
+            $http({
+                method: 'POST',
+                url: 'Assunto/Delete',
+                data: AssuntoData,
+                dataType: 'json',
+                headers: { "Content-Type": "application/json" }
+            }).then(function successCallback(response) {
+  
+                $scope.CloseNovoAssunto();
+                $scope.CarregarTodos();
+                $scope.LimpaDados();
+
+
+            }, function errorCallback(response) {
+
+                $scope.error = "Erro ao obter Assuntoes";
+            })
+        }
+        $scope.AdicionaNovoAssunto = function () {
+            $scope.AssuntoData.Descricao = $("#inputDescricao").val();
+
+            $http({
+                method: 'POST',
+                url: 'Assunto/Create',
+                data: $scope.AssuntoData,
+                dataType: 'json',
+                headers: { "Content-Type": "application/json" }
+            }).then(function successCallback(response) {
+
+                $scope.CloseNovoAssunto();
+                $scope.CarregarTodos();
+                $scope.LimpaDados();
+
+
+            }, function errorCallback(response) {
+
+                $scope.error = "Erro ao obter Assuntoes";
+            })
+        }
+        $scope.OrdenaAssuntoes = function (ordem) {
+            $scope.OrdemLista = ordem;
+            $scope.ListaAssuntoes = orderBy($scope.ListaAssuntoes, $scope.OrdemLista, $scope.OrdemListaRev);
+
+
+        };
+ 
+        $scope.AlteraDadosAssunto = function () {
+            $scope.AssuntoData.Codigo = $("#inputcodigo").val();
+            $scope.AssuntoData.Descricao = $("#inputDescricao").val();
+            $http({
+                method: 'POST',
+                url: 'Assunto/Update',
+                data: $scope.AssuntoData,
+                dataType: 'json',
+                headers: { "Content-Type": "application/json" }
+            }).then(function successCallback(response) {
+                $scope.CloseAlteraAssunto();
+                $scope.CarregarTodos();
+                $scope.LimpaDados();
+                
+            }, function errorCallback(response) {
+                    alert(response.Data.Mensagem);
+            })
+        }
+
+        $('#add-form').on('submit', function (e) {
+            e.preventDefault();
+            $scope.AdicionaNovoAssunto();
+        });
+
+        $('#update-form').on('submit', function (e) {
+            e.preventDefault();
+            $scope.AlteraDadosAssunto();
+        });
+
     }
-}]);
+
+ ]);

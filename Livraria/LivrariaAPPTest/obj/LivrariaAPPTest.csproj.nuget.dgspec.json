@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\ProjetosGit\\Livraria\\LivrariaAPPTest\\LivrariaAPPTest.csproj": {}
+  },
+  "projects": {
+    "D:\\ProjetosGit\\Livraria\\LivrariaAPPTest\\LivrariaAPPTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\ProjetosGit\\Livraria\\LivrariaAPPTest\\LivrariaAPPTest.csproj",
+        "projectName": "LivrariaAPPTest",
+        "projectPath": "D:\\ProjetosGit\\Livraria\\LivrariaAPPTest\\LivrariaAPPTest.csproj",
+        "packagesPath": "C:\\Users\\MauricioJordao\\.nuget\\packages\\",
+        "outputPath": "D:\\ProjetosGit\\Livraria\\LivrariaAPPTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\MauricioJordao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\ProjetosGit\\Livraria\\LivrariaWebAppApi\\LivrariaWebAppApi.csproj": {
+                "projectPath": "D:\\ProjetosGit\\Livraria\\LivrariaWebAppApi\\LivrariaWebAppApi.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.4.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.15.1, )"
+            },
+            "RhinoMocks": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "nunit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\ProjetosGit\\Livraria\\LivrariaWebAppApi\\LivrariaWebAppApi.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\ProjetosGit\\Livraria\\LivrariaWebAppApi\\LivrariaWebAppApi.csproj",
+        "projectName": "LivrariaWebAppApi",
+        "projectPath": "D:\\ProjetosGit\\Livraria\\LivrariaWebAppApi\\LivrariaWebAppApi.csproj"
+      },
+      "frameworks": {
+        "net452": {}
+      }
+    }
+  }
+}

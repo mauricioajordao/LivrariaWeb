@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/App/Livro/LivroController.js"></script>
+
+
+<div ng-controller="LivroController">
+    <div id="ListaLivros>">
+        <h2 style="align-content: center">Lista de Livroes </h2>
+        <div ng-init="ObterTodos()"></div>
+        <br />
+        <table>
+            <tr>
+                <td style="align-items:flex-start" width="5%">
+                    <a href="#" ng-click="CriaLivro()" class="btn btn-primary glyphicon glyphicon-play   btn-xs">Novo</a>
+                </td>
+                <td width="90%"></td>
+                <td style="align-items:flex-end" width="5%">
+                    <a href="Livro/Report" class="btn btn-primary btn-xs glyphicon glyphicon-print glyphicon-align-right">Relatorio</a>
+                </td>
+            </tr>
+
+
+
+        </table>
+        <br />
+        <br />
+        <div class="table-responsive">
+            <table id="mytable" class="table table-bordred table-striped">
+                <thead>
+                <th> <a href="#" ng-click="OrdenaLivroes('Codigo')">Codigo</a></th>
+                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Nome</a></th>
+                <th> <a href="#"                                   >Editora</a></th>
+                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Edicão</a></th>
+                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Publicacão</a></th>
+                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Preço</a></th>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="item in ListaLivroes|itemsPerPage:10">
+                        <td>{{item.Codigo}}</td>
+                        <td>{{item.Nome}}</td>
+                        <td>
+                            <button id="{{item.Codigo}}" name="{{item.Nome}}" class="glyphicon glyphicon-pencil btn btn-danger btn-xs" onclick='exibirBoxAlteraItem(angular, this.id ,this.name)'>
+                            </button>
+                        </td>
+                        <td>
+                            <button id="{{item.Codigo}}" class="glyphicon glyphicon-trash btn btn-danger btn-xs" onclick='deletaitem(angular, this.id )'>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <script>
+                function deletaitem(angular, item) {
+                    var confirma = confirm("excluir Item ?")
+                    if (confirma = true) {
+                        var elemento = document.getElementById('mytable');
+                        var $scope = angular.element(elemento).scope();
+                        $scope.DeleteLivro(item);
+                    }
+                };
+                function exibirBoxAlteraItem(Angular, Codigo, Nome) {
+                        var elemento = document.getElementById('mytable');
+                        var $scope = angular.element(elemento).scope();
+                         $scope.AlteraLivro(Codigo, Nome);
+
+
+                };
+            </script>
+            <div style="align-content:flex-end ; align-self:flex-end"></div>
+            <dir-pagination-controls style="align-content:flex-end" max-size="5" boundary-links="true"></dir-pagination-controls>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div id="NovoLivro" tabindex="-1" role="dialog" class="modal fade" align="center" aria-labelledby="add-modal-label">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="add-modal-label">Criar Livro</h4>
+            </div>
+
+            <form class="form-horizontal" role="form" id="add-form" ng-submit="AdicionaNovoLivro()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="add-firstname" name="firstname" placeholder="Nome" ng-model="LivroData.Nome" required>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="AlteraLivro" tabindex="-1" role="dialog" class="modal fade" align="center" aria-labelledby="add-modal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="add-modal-label">Alterar Livro</h4>
+            </div>
+
+            <form class="form-horizontal" role="form" id="update-form" ng-submit="AlteraDadosLivro()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add-codigo" class="col-sm-3 control-label">Código</label>
+                        <div class="col-sm-1">
+                            <input id="inputcodigo" type="text" width="30" disabled="disabled" class="form-control" style="align-self:self-start; width:50px;" ng-model="LivroData.Codigo" required>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-3 control-label">Nome</label>
+                        <div class="col-sm-5">
+                            <input id="inputnome" type="text" width="80" style="width: 300px;" class="form-control" ng-model="LivroData.Nome" required>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -8,10 +8,15 @@
         $scope.Close = function () {
             $location.path('/');
         }
-        $scope.autorData = {
-            Codigo: 0,
-            Nome: ""
+        $scope.LimpaDados = function () {
+            $scope.autorData = {
+                Codigo: 0,
+                Nome: ""
+            };
+            $scope.apply();
         };
+        $scope.LimpaDados();
+
         //Get all employee and bind with html table
         $scope.CarregarTodos = function () {
 
@@ -28,7 +33,11 @@
             })
         };
         $scope.CriaAutor = function () {
+            $("#inputcodigo").val("");
+            $("#inputnome").val("");
             $("#NovoAutor").modal('show');
+            $scope.LimpaDados();
+            
 
         }
         $scope.AlteraAutor = function (vcodigo, vnome) {
@@ -54,7 +63,7 @@
             var autorData = {
                 Codigo: codigo
             };
-
+            $scope.autorData.Nome = $("#inputnome").val();
             $http({
                 method: 'POST',
                 url: 'Autor/Delete',
@@ -62,10 +71,9 @@
                 dataType: 'json',
                 headers: { "Content-Type": "application/json" }
             }).then(function successCallback(response) {
-                $scope.Mensagem(response.Mensagem);
                 $scope.CloseNovoAutor();
                 $scope.CarregarTodos();
-                $scope.Nome = "";
+                $scope.LimpaDados();
 
 
             }, function errorCallback(response) {
@@ -83,10 +91,10 @@
                 dataType: 'json',
                 headers: { "Content-Type": "application/json" }
             }).then(function successCallback(response) {
-                $scope.Mensagem(response.Mensagem);
                 $scope.CloseNovoAutor();
                 $scope.CarregarTodos();
-                $scope.Nome = "";
+                $scope.LimpaDados();
+
 
 
             }, function errorCallback(response) {
@@ -100,18 +108,7 @@
 
 
         };
-        $scope.Mensagem = function (msg) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .parent(angular.element(document.querySelector('#DialogMensagem')))
-                    .clickOutsideToClose(true)
-                    .title('Mensagem')
-                    .textContent(msg)
-                    .ariaLabel('Mensagem')
-                    .ok('OK')
-
-            );
-        };
+ 
         $scope.AlteraDadosAutor = function () {
             $scope.autorData.Codigo = $("#inputcodigo").val();
             $scope.autorData.Nome = $("#inputnome").val();
@@ -124,8 +121,9 @@
             }).then(function successCallback(response) {
                 $scope.CloseAlteraAutor();
                 $scope.CarregarTodos();
- 
-                $scope.$parent.$location.reload();
+                $scope.LimpaDados();
+
+                
             }, function errorCallback(response) {
                     alert(response.Data.Mensagem);
             })

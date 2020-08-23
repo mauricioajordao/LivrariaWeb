@@ -36,7 +36,7 @@ namespace LivrariaWebAppApi.Controllers
         public AutorController() : this(new LivrariaDBEntities()) { }
  
         public AutorController(LivrariaDBEntities Db)
-        { }
+        { db = Db; }
 
         [HttpGet, ActionName("Report")]
         public ActionResult Report()
@@ -78,7 +78,7 @@ namespace LivrariaWebAppApi.Controllers
  
         [HttpPost, ActionName("Create")]
        
-        public ActionResult Create( string Nome)
+        public ActionResult Create( int Codigo , string Nome)
         {
             try
             {

@@ -28,25 +28,51 @@
         <br />
         <br />
         <div class="table-responsive">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Procurar</label>
+                    <input type="text" ng-model="procurar" class="form-control" placeholder="Procurar...">
+                </div>
+            </form>
+
             <table id="mytable" class="table table-bordred table-striped">
                 <thead>
                 <th> <a href="#" ng-click="OrdenaLivroes('Codigo')">Codigo</a></th>
                 <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Nome</a></th>
-                <th> <a href="#"                                   >Editora</a></th>
-                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Edicão</a></th>
-                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Publicacão</a></th>
-                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Preço</a></th>
+                <th> <span>Editora</span></th>
+                <th> <span>Edicão</span></th>
+                <th> <a href="#" ng-click="OrdenaLivroes('publicação')">Publicacão</a></th>
+                <th> <span>Preço</span></th>
+                <th> <span>Autores</span></th>
+                <th> <span>Assuntos</span></th>
+
                 </thead>
+
+                codL : 0 ,
+                titulo : "",
+                editora : "",
+                edicao : 0 ,
+                anopublicacao = 0,
+                preco = 0,
+
                 <tbody>
-                    <tr dir-paginate="item in ListaLivroes|itemsPerPage:10">
-                        <td>{{item.Codigo}}</td>
-                        <td>{{item.Nome}}</td>
+                    <tr dir-paginate="item in ListaLivroes|itemsPerPage:7|filter:procurar">
+                        <td>{{item.codL}}</td>
+                        <td>{{item.titulo}}</td>
+                        <td>{{item.editora}}</td>
+                        <td>{{item.edicao}}</td>
+                        <td>{{item.anopublicacao}}</td>
+                        <td>{{item.preco}}</td>
+                        <td><textarea>{{item.autoresTXT}}</textarea></td>
+                        <td><textarea>{{item.assuntosTXT}}</textarea></td>
+
+
                         <td>
-                            <button id="{{item.Codigo}}" name="{{item.Nome}}" class="glyphicon glyphicon-pencil btn btn-danger btn-xs" onclick='exibirBoxAlteraItem(angular, this.id ,this.name)'>
+                            <button id="{{item.codL}}" name="{{item.titulo}}" class="glyphicon glyphicon-pencil btn btn-danger btn-xs" onclick='exibirBoxAlteraItem(angular, this.id ,this.name)'>
                             </button>
                         </td>
                         <td>
-                            <button id="{{item.Codigo}}" class="glyphicon glyphicon-trash btn btn-danger btn-xs" onclick='deletaitem(angular, this.id )'>
+                            <button id="{{item.codL}}" class="glyphicon glyphicon-trash btn btn-danger btn-xs" onclick='deletaitem(angular, this.id )'>
                             </button>
 
                         </td>
@@ -63,9 +89,9 @@
                     }
                 };
                 function exibirBoxAlteraItem(Angular, Codigo, Nome) {
-                        var elemento = document.getElementById('mytable');
-                        var $scope = angular.element(elemento).scope();
-                         $scope.AlteraLivro(Codigo, Nome);
+                    var elemento = document.getElementById('mytable');
+                    var $scope = angular.element(elemento).scope();
+                    $scope.AlteraLivro(Codigo, Nome);
 
 
                 };

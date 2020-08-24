@@ -13,7 +13,7 @@
                 Codigo: 0,
                 Nome: ""
             };
-            $scope.apply();
+           
         };
         $scope.LimpaDados();
 

@@ -28,13 +28,19 @@
         <br />
         <br />
         <div class="table-responsive">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Procurar</label>
+                    <input type="text" ng-model="procurar" class="form-control" placeholder="Procurar...">
+                </div>
+            </form>
             <table id="mytable" class="table table-bordred table-striped">
                 <thead>
                 <th> <a href="#" ng-click="OrdenaAssuntoes('Codigo')">Codigo</a></th>
                 <th> <a href="#" ng-click="OrdenaAssuntoes('Descricao')">Descricao</a></th>
                 </thead>
                 <tbody>
-                    <tr dir-paginate="item in ListaAssuntoes|itemsPerPage:10">
+                    <tr dir-paginate="item in ListaAssuntoes|itemsPerPage:10|filter:procurar">
                         <td>{{item.Codigo}}</td>
                         <td>{{item.Descricao}}</td>
                         <td>
@@ -42,7 +48,7 @@
                             </button>
                         </td>
                         <td>
-                            <button id="{{item.Codigo}}"  class="glyphicon glyphicon-trash btn btn-danger btn-xs" onclick='deletaitem(angular, this.id )'>
+                            <button id="{{item.Codigo}}" class="glyphicon glyphicon-trash btn btn-danger btn-xs" onclick='deletaitem(angular, this.id )'>
                             </button>
 
                         </td>
@@ -59,10 +65,10 @@
                     }
                 };
                 function exibirBoxAlteraItem(Angular, Codigo, Descricao) {
-                        var elemento = document.getElementById('mytable');
-                        var $scope = angular.element(elemento).scope();
-                         $scope.AlteraAssunto(Codigo, Descricao);
-                    
+                    var elemento = document.getElementById('mytable');
+                    var $scope = angular.element(elemento).scope();
+                    $scope.AlteraAssunto(Codigo, Descricao);
+
 
                 };
             </script>

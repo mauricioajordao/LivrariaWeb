@@ -1,12 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LivrariaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LivrariaDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="assuntoes" EntityType="LivrariaDBModel.assunto" />
+    <EntitySet Name="autors" EntityType="LivrariaDBModel.autor" />
+    <EntitySet Name="Livroes" EntityType="LivrariaDBModel.Livro" />
+    <EntitySet Name="sysdiagrams" EntityType="LivrariaDBModel.sysdiagram" />
+    <EntitySet Name="Vw_Livros" EntityType="LivrariaDBModel.Vw_Livros" />
+    <AssociationSet Name="livro_assunto" Association="LivrariaDBModel.livro_assunto">
+      <End Role="assunto" EntitySet="assuntoes" />
+      <End Role="Livro" EntitySet="Livroes" />
+    </AssociationSet>
+    <AssociationSet Name="livro_autor" Association="LivrariaDBModel.livro_autor">
+      <End Role="autor" EntitySet="autors" />
+      <End Role="Livro" EntitySet="Livroes" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="assunto">
     <Key>
       <PropertyRef Name="codAS" />
     </Key>
     <Property Name="codAS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Livroes" Relationship="Self.livro_assunto" FromRole="assunto" ToRole="Livro" />
+    <NavigationProperty Name="Livroes" Relationship="LivrariaDBModel.livro_assunto" FromRole="assunto" ToRole="Livro" />
   </EntityType>
   <EntityType Name="autor">
     <Key>
@@ -14,26 +29,26 @@
     </Key>
     <Property Name="codA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Livroes" Relationship="Self.livro_autor" FromRole="autor" ToRole="Livro" />
+    <NavigationProperty Name="Livroes" Relationship="LivrariaDBModel.livro_autor" FromRole="autor" ToRole="Livro" />
   </EntityType>
   <EntityType Name="Livro">
     <Key>
       <PropertyRef Name="codL" />
     </Key>
     <Property Name="codL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="titulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="editora" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="edicao" Type="Int32" />
-    <Property Name="anopublicao" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="edicao" Type="Int32" Nullable="false" />
+    <Property Name="anopublicao" Type="Int32" Nullable="false" />
     <Property Name="preco" Type="Decimal" Precision="12" Scale="2" />
-    <NavigationProperty Name="assuntoes" Relationship="Self.livro_assunto" FromRole="Livro" ToRole="assunto" />
-    <NavigationProperty Name="autors" Relationship="Self.livro_autor" FromRole="Livro" ToRole="autor" />
+    <NavigationProperty Name="assuntoes" Relationship="LivrariaDBModel.livro_assunto" FromRole="Livro" ToRole="assunto" />
+    <NavigationProperty Name="autors" Relationship="LivrariaDBModel.livro_autor" FromRole="Livro" ToRole="autor" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
       <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="principal_id" Type="Int32" Nullable="false" />
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
@@ -65,26 +80,11 @@
     <Property Name="nome" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="livro_assunto">
-    <End Role="assunto" Type="Self.assunto" Multiplicity="*" />
-    <End Role="Livro" Type="Self.Livro" Multiplicity="*" />
+    <End Type="LivrariaDBModel.assunto" Role="assunto" Multiplicity="*" />
+    <End Type="LivrariaDBModel.Livro" Role="Livro" Multiplicity="*" />
   </Association>
   <Association Name="livro_autor">
-    <End Role="autor" Type="Self.autor" Multiplicity="*" />
-    <End Role="Livro" Type="Self.Livro" Multiplicity="*" />
+    <End Type="LivrariaDBModel.autor" Role="autor" Multiplicity="*" />
+    <End Type="LivrariaDBModel.Livro" Role="Livro" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="LivrariaDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="assuntoes" EntityType="Self.assunto" />
-    <EntitySet Name="autors" EntityType="Self.autor" />
-    <EntitySet Name="Livroes" EntityType="Self.Livro" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="Vw_Livros" EntityType="Self.Vw_Livros" />
-    <AssociationSet Name="livro_assunto" Association="Self.livro_assunto">
-      <End Role="assunto" EntitySet="assuntoes" />
-      <End Role="Livro" EntitySet="Livroes" />
-    </AssociationSet>
-    <AssociationSet Name="livro_autor" Association="Self.livro_autor">
-      <End Role="autor" EntitySet="autors" />
-      <End Role="Livro" EntitySet="Livroes" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

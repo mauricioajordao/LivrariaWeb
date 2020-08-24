@@ -1,127 +1,184 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using LivrariaWebAppApi.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LivrariaWebAppApi.Models;
 
 namespace LivrariaWebAppApi.Controllers
 {
+    public class Livroview
+    {
+        public int codL;
+        public string titulo;
+        public string editora;
+        public int edicao;
+        public int anopublicao;
+        public decimal? preco;
+        public List<assuntoview> assuntos;
+        public List<Autorview> autores;
+        public string autoresTXT;
+        public string assuntosTXT;
+
+    }
+
     public class LivroController : Controller
     {
-        private LivrariaDBEntities db = new LivrariaDBEntities();
+        public LivrariaDBEntities db { get; private set; }
+
+
 
         // GET: Livro
+
+        public LivroController() : this(new LivrariaDBEntities()) { }
+
+        public LivroController(LivrariaDBEntities Db)
+        { db = Db; }
+
+        [HttpGet, ActionName("Report")]
+        public ActionResult Report()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "LivroReport.rpt"));
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            List<assunto> Listaassuntos = db.assuntoes.ToList();
+
+            rd.SetDataSource(Listaassuntos);
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "assuntoReport.pdf");
+        }
         public ActionResult Index()
-        {
-            return View(db.Livroes.ToList());
-        }
-
-        // GET: Livro/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Livro livro = db.Livroes.Find(id);
-            if (livro == null)
-            {
-                return HttpNotFound();
-            }
-            return View(livro);
-        }
-
-        // GET: Livro/Create
-        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Livro/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "codL,titulo,editora,edicao,anopublicao,preco")] Livro livro)
+
+        public ActionResult GetAll()
         {
-            if (ModelState.IsValid)
+            List<Livroview> retorno = new List<Livroview>();
+
+            foreach (var item in db.Livroes.ToList())
             {
-                db.Livroes.Add(livro);
+                var vautoresTXT = "";
+                foreach (var itema in item.autors)
+                {
+                    vautoresTXT += "[" + itema.nome + "]";
+                }
+                var vassuntosTXT = "";
+                foreach (var itemb in item.assuntoes)
+                {
+                    vassuntosTXT += "[" + itemb.descricao + "]";
+                }
+
+
+                retorno.Add(
+                    new Livroview()
+                    {
+                        codL = item.codL,
+                        anopublicao = item.anopublicao,
+                        edicao = item.edicao,
+                        editora = item.editora,
+                        preco = item.preco,
+                        titulo = item.titulo,
+                        assuntos = new List<assuntoview>(),
+                        autores = new List<Autorview>(),
+                        autoresTXT = vautoresTXT,
+                        assuntosTXT = vassuntosTXT
+                    }
+
+
+
+                );
+
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpPost, ActionName("Create")]
+
+        public ActionResult Create(int Codigo, string Descricao)
+        {
+            try
+            {
+                db.assuntoes.Add(new assunto() { descricao = Descricao });
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(livro);
+            }
+            catch (Exception e)
+            {
+                return Json(
+                 new ObjetoRetorno()
+                 { Status = -1, Mensagem = e.Message }
+                 , JsonRequestBehavior.AllowGet);
+            }
+            return Json(
+                   new ObjetoRetorno()
+                   { Status = 0, Mensagem = "assunto Incluido com Sucesso" }
+                   , JsonRequestBehavior.AllowGet);
+
         }
 
-        // GET: Livro/Edit/5
-        public ActionResult Edit(int? id)
+        [HttpPost, ActionName("Update")]
+        public ActionResult Update(int Codigo, string Descricao)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Livro livro = db.Livroes.Find(id);
-            if (livro == null)
-            {
-                return HttpNotFound();
-            }
-            return View(livro);
-        }
-
-        // POST: Livro/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "codL,titulo,editora,edicao,anopublicao,preco")] Livro livro)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(livro).State = EntityState.Modified;
+                assunto vassunto = db.assuntoes.Find(Codigo);
+                vassunto.descricao = Descricao;
+                db.Entry(vassunto).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
             }
-            return View(livro);
+            catch (Exception e)
+            {
+                return Json(
+                    new ObjetoRetorno()
+                    { Status = -1, Mensagem = e.Message }
+                    , JsonRequestBehavior.AllowGet);
+            }
+            return Json(
+                   new ObjetoRetorno()
+                   { Status = 0, Mensagem = "assunto Alterado com Sucesso" }
+                   , JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Livro/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Livro livro = db.Livroes.Find(id);
-            if (livro == null)
-            {
-                return HttpNotFound();
-            }
-            return View(livro);
-        }
 
-        // POST: Livro/Delete/5
+
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int Codigo)
         {
-            Livro livro = db.Livroes.Find(id);
-            db.Livroes.Remove(livro);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                var vassunto = db.assuntoes.Find(Codigo);
+                db.assuntoes.Remove(vassunto);
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                return Json(
+                    new ObjetoRetorno()
+                    { Status = -1, Mensagem = e.Message }
+                    , JsonRequestBehavior.AllowGet);
+            }
+            return Json(
+                   new ObjetoRetorno()
+                   { Status = 0, Mensagem = "assunto Excluido com Sucesso" }
+                   , JsonRequestBehavior.AllowGet);
+
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
     }
 }

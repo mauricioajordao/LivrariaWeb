@@ -13,7 +13,7 @@
                 Codigo: 0,
                 Descricao: ""
             };
-            $scope.apply();
+           
         };
         //Get all employee and bind with html table
         $scope.CarregarTodos = function () {

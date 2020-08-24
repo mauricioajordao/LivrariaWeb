@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c6222eb857cf42b6b68fe4641643dd08" Name="Diagram1">
-        <EntityTypeShape EntityType="LivrariaDBModel.assunto" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LivrariaDBModel.autor" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LivrariaDBModel.Livro" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="LivrariaDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LivrariaDBModel.Vw_Livros" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="LivrariaDBModel.livro_assunto" ManuallyRouted="false" />
-        <AssociationConnector Association="LivrariaDBModel.livro_autor" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LivrariaDBModel.assunto" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="LivrariaDBModel.autor" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="LivrariaDBModel.Livro" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="LivrariaDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="LivrariaDBModel.Vw_Livros" Width="1.5" PointX="4.75" PointY="4.75" />
+        <AssociationConnector Association="LivrariaDBModel.livro_assunto" />
+        <AssociationConnector Association="LivrariaDBModel.livro_autor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

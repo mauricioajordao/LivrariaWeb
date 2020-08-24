@@ -70,13 +70,15 @@
                 edicao : 0 , 
                 anopublicao = 0,
                 preco = 0,
-                assuntos = [{codigo : 0 , Descricao : ""}]  ,
-                autores  =[{ codigo: 0, Nome: "" }] 
+                assuntos : [{codigo : 0 , Descricao : ""}]  ,
+                autores  : [{ codigo: 0, Nome: "" }],
+                autoresTXT: "Mauricio",
+                assuntosTXT: "Jordao"
                 }
                
             };
-            $scope.apply();
-        };
+            
+        
         $scope.LimpaDados();
 
         //Get all employee and bind with html table

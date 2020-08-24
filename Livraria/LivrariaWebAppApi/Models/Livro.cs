@@ -24,8 +24,8 @@ namespace LivrariaWebAppApi.Models
         public int codL { get; set; }
         public string titulo { get; set; }
         public string editora { get; set; }
-        public Nullable<int> edicao { get; set; }
-        public string anopublicao { get; set; }
+        public int edicao { get; set; }
+        public int anopublicao { get; set; }
         public Nullable<decimal> preco { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

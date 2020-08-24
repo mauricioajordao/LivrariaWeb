@@ -19,10 +19,10 @@
       <PropertyRef Name="codL" />
     </Key>
     <Property Name="codL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="titulo" Type="varchar" MaxLength="40" />
+    <Property Name="titulo" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="editora" Type="varchar" MaxLength="40" />
-    <Property Name="edicao" Type="int" />
-    <Property Name="anopublicao" Type="varchar" MaxLength="4" />
+    <Property Name="edicao" Type="int" Nullable="false" />
+    <Property Name="anopublicao" Type="int" Nullable="false" />
     <Property Name="preco" Type="decimal" Precision="12" Scale="2" />
   </EntityType>
   <EntityType Name="livro_assunto">

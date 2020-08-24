@@ -4,78 +4,78 @@
     <EntitySetMapping Name="assuntoes">
       <EntityTypeMapping TypeName="LivrariaDBModel.assunto">
         <MappingFragment StoreEntitySet="assunto">
-          <ScalarProperty Name="codAS" ColumnName="codAS" />
           <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="codAS" ColumnName="codAS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="autors">
       <EntityTypeMapping TypeName="LivrariaDBModel.autor">
         <MappingFragment StoreEntitySet="autor">
-          <ScalarProperty Name="codA" ColumnName="codA" />
           <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="codA" ColumnName="codA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Livroes">
       <EntityTypeMapping TypeName="LivrariaDBModel.Livro">
         <MappingFragment StoreEntitySet="Livro">
-          <ScalarProperty Name="codL" ColumnName="codL" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="editora" ColumnName="editora" />
-          <ScalarProperty Name="edicao" ColumnName="edicao" />
-          <ScalarProperty Name="anopublicao" ColumnName="anopublicao" />
           <ScalarProperty Name="preco" ColumnName="preco" />
+          <ScalarProperty Name="anopublicao" ColumnName="anopublicao" />
+          <ScalarProperty Name="edicao" ColumnName="edicao" />
+          <ScalarProperty Name="editora" ColumnName="editora" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="codL" ColumnName="codL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="LivrariaDBModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Vw_Livros">
       <EntityTypeMapping TypeName="LivrariaDBModel.Vw_Livros">
         <MappingFragment StoreEntitySet="Vw_Livros">
-          <ScalarProperty Name="codL" ColumnName="codL" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="editora" ColumnName="editora" />
-          <ScalarProperty Name="edicao" ColumnName="edicao" />
-          <ScalarProperty Name="anopublicao" ColumnName="anopublicao" />
-          <ScalarProperty Name="preco" ColumnName="preco" />
-          <ScalarProperty Name="livro_codl" ColumnName="livro_codl" />
-          <ScalarProperty Name="assunto_codAS" ColumnName="assunto_codAS" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="codAS" ColumnName="codAS" />
-          <ScalarProperty Name="descricao" ColumnName="descricao" />
-          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-          <ScalarProperty Name="autor_coda" ColumnName="autor_coda" />
-          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
-          <ScalarProperty Name="codA" ColumnName="codA" />
           <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="codA" ColumnName="codA" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="autor_coda" ColumnName="autor_coda" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="codAS" ColumnName="codAS" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="assunto_codAS" ColumnName="assunto_codAS" />
+          <ScalarProperty Name="livro_codl" ColumnName="livro_codl" />
+          <ScalarProperty Name="preco" ColumnName="preco" />
+          <ScalarProperty Name="anopublicao" ColumnName="anopublicao" />
+          <ScalarProperty Name="edicao" ColumnName="edicao" />
+          <ScalarProperty Name="editora" ColumnName="editora" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="codL" ColumnName="codL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="livro_assunto" TypeName="LivrariaDBModel.livro_assunto" StoreEntitySet="livro_assunto">
-      <EndProperty Name="assunto">
-        <ScalarProperty Name="codAS" ColumnName="assunto_codAS" />
-      </EndProperty>
       <EndProperty Name="Livro">
         <ScalarProperty Name="codL" ColumnName="livro_codl" />
       </EndProperty>
+      <EndProperty Name="assunto">
+        <ScalarProperty Name="codAS" ColumnName="assunto_codAS" />
+      </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="livro_autor" TypeName="LivrariaDBModel.livro_autor" StoreEntitySet="livro_autor">
-      <EndProperty Name="autor">
-        <ScalarProperty Name="codA" ColumnName="autor_coda" />
-      </EndProperty>
       <EndProperty Name="Livro">
         <ScalarProperty Name="codL" ColumnName="livro_codL" />
+      </EndProperty>
+      <EndProperty Name="autor">
+        <ScalarProperty Name="codA" ColumnName="autor_coda" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

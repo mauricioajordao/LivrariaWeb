@@ -3,6 +3,7 @@ using LivrariaWebAppApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,7 @@ namespace LivrariaWebAppApi.Controllers
         public string editora;
         public int edicao;
         public int anopublicao;
-        public decimal? preco;
+        public string preco;
         public List<assuntoview> assuntos;
         public List<Autorview> autores;
         public string autoresTXT;
@@ -71,14 +72,20 @@ namespace LivrariaWebAppApi.Controllers
                 var vautoresTXT = "";
                 foreach (var itema in item.autors)
                 {
-                    vautoresTXT += "[" + itema.nome + "]";
+                    vautoresTXT += "[" + itema.nome + "] ";
                 }
                 var vassuntosTXT = "";
                 foreach (var itemb in item.assuntoes)
                 {
-                    vassuntosTXT += "[" + itemb.descricao + "]";
+                    vassuntosTXT += "[" + itemb.descricao.ToUpper() + "] ";
                 }
-
+                var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                // faz uma cópia das informações de formatação de número da cultura local
+                var numberFormatInfo = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
+                // fixa o símbolo da moeda estrangeira
+                numberFormatInfo.CurrencySymbol = "R$";
+                // obtém o valor em moeda estrangeira formatado conforme a cultura local
+              
 
                 retorno.Add(
                     new Livroview()
@@ -87,7 +94,7 @@ namespace LivrariaWebAppApi.Controllers
                         anopublicao = item.anopublicao,
                         edicao = item.edicao,
                         editora = item.editora,
-                        preco = item.preco,
+                        preco = string.Format(numberFormatInfo, "{0:C}", item.preco.ToString()),
                         titulo = item.titulo,
                         assuntos = new List<assuntoview>(),
                         autores = new List<Autorview>(),

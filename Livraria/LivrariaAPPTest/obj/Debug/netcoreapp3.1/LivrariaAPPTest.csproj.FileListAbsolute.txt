@@ -1,7 +1,3 @@
-D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.csprojAssemblyReference.cache
-D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.AssemblyInfoInputs.cache
-D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.AssemblyInfo.cs
-D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.csproj.CoreCompileInputs.cache
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\NUnit3.TestAdapter.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\NUnit3.TestAdapter.pdb
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\nunit.engine.dll
@@ -12,6 +8,7 @@ D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\LivrariaAPPTest.
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\LivrariaAPPTest.runtimeconfig.json
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\LivrariaAPPTest.runtimeconfig.dev.json
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\LivrariaAPPTest.dll
+D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\LivrariaAPPTest.pdb
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\Microsoft.DotNet.InternalAbstractions.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CoreUtilities.dll
@@ -25,6 +22,7 @@ D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\testhost.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\nunit.framework.dll
+D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\Rhino.Mocks.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
@@ -131,9 +129,11 @@ D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\System.Web.WebPa
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.xml
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\System.Web.Razor.xml
 D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.xml
+D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.csprojAssemblyReference.cache
+D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.AssemblyInfoInputs.cache
+D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.AssemblyInfo.cs
+D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.csproj.CoreCompileInputs.cache
 D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.csproj.CopyComplete
-D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.genruntimeconfig.cache
-D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\LivrariaAPPTest.pdb
-D:\ProjetosGit\Livraria\LivrariaAPPTest\bin\Debug\netcoreapp3.1\Rhino.Mocks.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.dll
 D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.pdb
+D:\ProjetosGit\Livraria\LivrariaAPPTest\obj\Debug\netcoreapp3.1\LivrariaAPPTest.genruntimeconfig.cache

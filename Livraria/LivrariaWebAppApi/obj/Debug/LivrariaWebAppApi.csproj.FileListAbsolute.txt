@@ -1,4 +1,5 @@
-D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\Reports\AutorReport.rpt
+D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\Reports\AutorReport.cs
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\LivrariaWebAppApi.dll.config
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\LivrariaWebAppApi.dll
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\LivrariaWebAppApi.pdb
@@ -12,6 +13,7 @@ D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CodeAnalysis.CSha
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.CSharp.Core.targets
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
@@ -79,6 +81,4 @@ D:\ProjetosGit\Livraria\LivrariaWebAppApi\obj\Debug\LivrariaWebAppApi.csproj.Cor
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\obj\Debug\LivrariaWebAppApi.csproj.CopyComplete
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\obj\Debug\LivrariaWebAppApi.dll
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\obj\Debug\LivrariaWebAppApi.pdb
-D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\Reports\AutorReport.rpt
-D:\ProjetosGit\Livraria\LivrariaWebAppApi\bin\Reports\AutorReport.cs
 D:\ProjetosGit\Livraria\LivrariaWebAppApi\obj\Debug\LivrariaWebAppApi.csprojAssemblyReference.cache

@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "UkA0Jz/sJ22r2rWybf3I3Tsa571WLpq+gUZIrm83hcKLrD05uqDpmt/HTwMqAkq69i1GD12t3ALuftv4ewURbQ==",
+  "dgSpecHash": "JaMOzaR8vHuqLw3zdz3Mpp8d4OMK9yN8+7NbMzJN4/40BL6/a8BGuHxqah0sRBA8uFq2PeCv/nmM8ulVnsRIMQ==",
   "success": true,
   "projectFilePath": "D:\\ProjetosGit\\Livraria\\LivrariaAPPTest\\LivrariaAPPTest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\MauricioJordao\\.nuget\\packages\\jquery\\2.1.1\\jquery.2.1.1.nupkg.sha512",
+    "C:\\Users\\MauricioJordao\\.nuget\\packages\\materialize\\0.97.6\\materialize.0.97.6.nupkg.sha512",
     "C:\\Users\\MauricioJordao\\.nuget\\packages\\microsoft.codecoverage\\16.4.0\\microsoft.codecoverage.16.4.0.nupkg.sha512",
     "C:\\Users\\MauricioJordao\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\MauricioJordao\\.nuget\\packages\\microsoft.dotnet.internalabstractions\\1.0.0\\microsoft.dotnet.internalabstractions.1.0.0.nupkg.sha512",

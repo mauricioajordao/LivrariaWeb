@@ -1,7 +1,10 @@
-﻿app.controller("LivroController", ['$scope', '$http', '$location', '$routeParams', '$mdDialog', 'orderByFilter',
+﻿
+app.controller("LivroController", ['$scope', '$http', '$location', '$routeParams', '$mdDialog', 'orderByFilter',
     function ($scope, $http, $location, $routeParams, $mdDialog, orderBy) {
 
+       
 
+        
         $scope.ListaLivros;
         $scope.ListaAutores;
         $scope.ListaAssuntos;
@@ -12,6 +15,12 @@
             $location.path('/');
         }
 
+        $scope.OrdenaLivros = function (ordem) {
+            $scope.OrdemLista = ordem;
+            $scope.ListaLivros = orderBy($scope.ListaLivros, $scope.OrdemLista, $scope.OrdemListaRev);
+
+
+        };
         // carregamento de listas externas
         
         $scope.CarregarTodos = function () {
@@ -21,7 +30,7 @@
                 url: 'Livro/GetAll'
             }).then(function successCallback(response) {
                 $scope.ListaLivros = response.data;
-                $scope.OrdenaLivroes($scope.OrdemLista);
+                $scope.OrdenaLivros($scope.OrdemLista);
 
             }, function errorCallback(response) {
 
@@ -48,7 +57,7 @@
                 method: 'GET',
                 url: 'Assunto/GetAll'
             }).then(function successCallback(response) {
-                $scope.ListaAssuntoes = response.data;
+                $scope.ListaAssuntos = response.data;
 
 
             }, function errorCallback(response) {
@@ -60,6 +69,7 @@
         $scope.CarregarTodosAutores();
         $scope.CarregarTodosAssuntos();
         $scope.CarregarTodos();
+
   
         
         $scope.LimpaDados = function () {
@@ -68,12 +78,12 @@
                 titulo : "", 
                 editora : "",
                 edicao : 0 , 
-                anopublicao = 0,
-                preco = 0,
+                anopublicao : 0,
+                preco : 0,
                 assuntos : [{codigo : 0 , Descricao : ""}]  ,
                 autores  : [{ codigo: 0, Nome: "" }],
-                autoresTXT: "Mauricio",
-                assuntosTXT: "Jordao"
+                autoresTXT: "",
+                assuntosTXT: ""
                 }
                
             };
@@ -88,10 +98,25 @@
             $("#inputcodigo").val("");
             $("#inputnome").val("");
             $("#NovoLivro").modal('show');
-            $scope.LimpaDados();
             
 
-        }
+            for (item in $scope.ListaAssuntos) {
+
+                var opt = "".concat("<option value=", item.Codigo, ">", item.Nome, "</option>");
+                $('#selectassuntos').append(opt);
+            };
+
+            for (item in $scope.ListaAutores){
+
+                var opt = "".concat("<option value=", item.Codigo, ">", item.Descricao, "</option>");
+
+                $('#selectaautores').append(opt);
+            };
+
+            $scope.LimpaDados();
+            };
+
+        
         $scope.AlteraLivro = function (vcodigo, vnome) {
 
             $scope.LivroData.Codigo = vcodigo;
@@ -145,6 +170,7 @@
                 $scope.CloseNovoLivro();
                 $scope.CarregarTodos();
                 $scope.LimpaDados();
+               
 
 
 
@@ -153,12 +179,7 @@
                 $scope.error = "Erro ao obter Livroes";
             })
         }
-        $scope.OrdenaLivroes = function (ordem) {
-            $scope.OrdemLista = ordem;
-            $scope.ListaLivros = orderBy($scope.ListaLivros, $scope.OrdemLista, $scope.OrdemListaRev);
-
-
-        };
+ 
  
         $scope.AlteraDadosLivro = function () {
             $scope.LivroData.Codigo = $("#inputcodigo").val();
@@ -189,7 +210,7 @@
             e.preventDefault();
             $scope.AlteraDadosLivro();
         });
-
+        $("#telalivros").show();
     }
 
  ]);

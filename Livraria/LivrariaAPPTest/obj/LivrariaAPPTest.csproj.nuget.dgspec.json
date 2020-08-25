@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[3.6.1, )"
             },
+            "materialize": {
+              "target": "Package",
+              "version": "[0.97.6, )"
+            },
             "nunit": {
               "target": "Package",
               "version": "[3.12.0, )"

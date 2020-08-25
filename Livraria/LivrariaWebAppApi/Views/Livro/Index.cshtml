@@ -5,19 +5,32 @@
 
 <script src="~/App/Livro/LivroController.js"></script>
 
+<style>
+    .bootstrap-select .bs-ok-default::after {
+        width: 0.3em;
+        height: 0.6em;
+        border-width: 0 0.1em 0.1em 0;
+        transform: rotate(45deg) translateY(0.5rem);
+    }
 
-<div ng-controller="LivroController">
+    .btn.dropdown-toggle:focus {
+        outline: none !important;
+    }
+</style>
+
+
+<div id="telalivros" ng-controller="LivroController" ng-cloak style="display:none">
     <div id="ListaLivros>">
-        <h2 style="align-content: center">Lista de Livroes </h2>
+        <h2 style="align-content: center">Lista de Livros </h2>
         <div ng-init="ObterTodos()"></div>
         <br />
-        <table>
-            <tr>
-                <td style="align-items:flex-start" width="5%">
+        <table style="border:none">
+            <tr style="border:none">
+                <td style="align-items:flex-start;border:none" width="5%">
                     <a href="#" ng-click="CriaLivro()" class="btn btn-primary glyphicon glyphicon-play   btn-xs">Novo</a>
                 </td>
-                <td width="90%"></td>
-                <td style="align-items:flex-end" width="5%">
+                <td width="90%" style="align-items:flex-start;border:none" ></td>
+                <td style="align-items:flex-end;border:none" width="5%">
                     <a href="Livro/Report" class="btn btn-primary btn-xs glyphicon glyphicon-print glyphicon-align-right">Relatorio</a>
                 </td>
             </tr>
@@ -34,44 +47,37 @@
                     <input type="text" ng-model="procurar" class="form-control" placeholder="Procurar...">
                 </div>
             </form>
-
-            <table id="mytable" class="table table-bordred table-striped">
-                <thead>
-                <th> <a href="#" ng-click="OrdenaLivroes('Codigo')">Codigo</a></th>
-                <th> <a href="#" ng-click="OrdenaLivroes('Titulo')">Nome</a></th>
-                <th> <span>Editora</span></th>
-                <th> <span>Edicão</span></th>
-                <th> <a href="#" ng-click="OrdenaLivroes('publicação')">Publicacão</a></th>
-                <th> <span>Preço</span></th>
-                <th> <span>Autores</span></th>
-                <th> <span>Assuntos</span></th>
-
-                </thead>
-
-                codL : 0 ,
-                titulo : "",
-                editora : "",
-                edicao : 0 ,
-                anopublicacao = 0,
-                preco = 0,
-
+            <br />
+            <table id="mytable" class="table table-bordred table-striped" ng-cloak>
+                <tr>
+                <td width="5%"> <a href="#" ng-click="OrdenaLivroes('Codigo')">Codigo</a></td>
+                <td width="25%"> <a href="#" ng-click="OrdenaLivroes('Titulo')">Titulo</a></td>
+                <td width="15%"> <span>Editora</span></td>
+                <td width="5%"> <span>Edicão</span></td>
+                <td width="5%"> <span>Ano</span></td>
+                <td width="5%"> <span>Preço </span></td>
+                <td width="17%"> <span>Autores</span></td>
+                <td width="17%"> <span>Assuntos</span></td>
+                <td width="3%"> </td>
+                <td width="3%"></td>
+                </tr>
                 <tbody>
-                    <tr dir-paginate="item in ListaLivroes|itemsPerPage:7|filter:procurar">
-                        <td>{{item.codL}}</td>
-                        <td>{{item.titulo}}</td>
-                        <td>{{item.editora}}</td>
-                        <td>{{item.edicao}}</td>
-                        <td>{{item.anopublicacao}}</td>
-                        <td>{{item.preco}}</td>
-                        <td><textarea>{{item.autoresTXT}}</textarea></td>
-                        <td><textarea>{{item.assuntosTXT}}</textarea></td>
+                    <tr dir-paginate="item in ListaLivros|itemsPerPage:7|filter:procurar">
+                        <td width="5%" align="right">{{item.codL}}</td>
+                        <td width="25%">{{item.titulo}}</td>
+                        <td width="15%">{{item.editora}}</td>
+                        <td width="5%" align="center">{{item.edicao}}</td>
+                        <td width="5%" align="center">{{item.anopublicao }}</td>
+                        <td width="5%" align="right">{{item.preco}}</td>
+                        <td width="17%"  ><textarea style="font-size:8px;width:95%;height:95%" readonly rows="2">{{item.autoresTXT}}</textarea></td>
+                        <td width="17%" ><textarea style="font-size:8px;width:95%;height:95%" readonly rows="2">{{item.assuntosTXT}}</textarea></td>
+                       
 
-
-                        <td>
-                            <button id="{{item.codL}}" name="{{item.titulo}}" class="glyphicon glyphicon-pencil btn btn-danger btn-xs" onclick='exibirBoxAlteraItem(angular, this.id ,this.name)'>
+                        <td widh="3%">
+                            <button id="{{item.codL}}"  class="glyphicon glyphicon-pencil btn btn-danger btn-xs" onclick='exibirBoxAlteraItem(angular, this.id )'>
                             </button>
                         </td>
-                        <td>
+                        <td widh="3%">
                             <button id="{{item.codL}}" class="glyphicon glyphicon-trash btn btn-danger btn-xs" onclick='deletaitem(angular, this.id )'>
                             </button>
 
@@ -88,10 +94,10 @@
                         $scope.DeleteLivro(item);
                     }
                 };
-                function exibirBoxAlteraItem(Angular, Codigo, Nome) {
+                function exibirBoxAlteraItem(Angular, Codigo) {
                     var elemento = document.getElementById('mytable');
                     var $scope = angular.element(elemento).scope();
-                    $scope.AlteraLivro(Codigo, Nome);
+                    $scope.AlteraLivro(Codigo);
 
 
                 };
@@ -117,11 +123,51 @@
             <form class="form-horizontal" role="form" id="add-form" ng-submit="AdicionaNovoLivro()">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="add-firstname" class="col-sm-2 control-label">Nome</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="add-firstname" name="firstname" placeholder="Nome" ng-model="LivroData.Nome" required>
+                        <label for="add-firstname" class="col-sm-2 control-label">Titulo</label>
+                        <div class="col-sm-3">
+                            <input width="60" type="text" class="form-control" id="titulo" ng-model="LivroData.Titulo" required>
                         </div>
 
+                    </div>
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Editora</label>
+                        <div class="col-sm-3">
+                            <input type="text" width="45" class="form-control" id="editora" ng-model="LivroData.Editora" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Edição</label>
+                        <div class="col-sm-3">
+                            <input type="number" min="0" max="10" width="3" class="form-control" id="Edicao" ng-model="LivroData.Edicao" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Publicação</label>
+                        <div class="col-sm-3">
+                            <input type="number" value="2020" min="1900" max="2020" width="5" class="form-control" id="publicacao" ng-model="LivroData.anopublicao" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Preço</label>
+                        <div class="col-sm-3">
+                            <input type="text" width="10" class="form-control" id="preco" ng-model="LivroData.preco">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Assuntos</label>
+                        <div id="divassuntos" class="col-sm-3">
+                            <select id="selectassuntos"
+                                    multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-firstname" class="col-sm-2 control-label">Assuntos</label>
+                        <div id="divautores" class="col-sm-3">
+                            <select id="selectautores"
+                                    multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
+                            </select>
+                        </div>
                     </div>
 
                 </div>
@@ -172,8 +218,4 @@
 
 
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 

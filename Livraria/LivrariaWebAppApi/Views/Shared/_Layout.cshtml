@@ -6,7 +6,64 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
+    <script>
+        function minErr(module) {
+            return function () {
+                var code = arguments[0],
+                    prefix = '[' + (module ? module + ':' : '') + code + '] ',
+                    template = arguments[1],
+                    templateArgs = arguments,
+                    stringify = function (obj) {
+                        if (typeof obj === 'function') {
+                            return obj.toString().replace(/ \{[\s\S]*$/, '');
+                        } else if (typeof obj === 'undefined') {
+                            return 'undefined';
+                        } else if (typeof obj !== 'string') {
+                            return JSON.stringify(obj);
+                        }
+                        return obj;
+                    },
+                    message, i;
+
+                message = prefix + template.replace(/\{\d+\}/g, function (match) {
+                    var index = +match.slice(1, -1), arg;
+
+                    if (index + 2 < templateArgs.length) {
+                        arg = templateArgs[index + 2];
+                        if (typeof arg === 'function') {
+                            return arg.toString().replace(/ ?\{[\s\S]*$/, '');
+                        } else if (typeof arg === 'undefined') {
+                            return 'undefined';
+                        } else if (typeof arg !== 'string') {
+                            return toJson(arg);
+                        }
+                        return arg;
+                    }
+                    return match;
+                });
+
+                message = message + '\nhttp://errors.angularjs.org/1.2.18/' +
+                    (module ? module + '/' : '') + code;
+                for (i = 2; i < arguments.length; i++) {
+                    message = message + (i == 2 ? '?' : '&') + 'p' + (i - 2) + '=' +
+                        encodeURIComponent(stringify(arguments[i]));
+                }
+
+                return new Error(message);
+            };
+        }
+     
+    </script>
     <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td, th, thead {
+            border: 1px solid black;
+        }
+
         .dialogdemoBasicUsage #popupContainer {
             position: relative;
         }
@@ -34,7 +91,11 @@
             margin-bottom: 0;
         }
     </style>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
     <script src="~/Scripts/angular.js"></script>
+
     <script src="~/Scripts/angular-cookies.js"></script>
     <script src="~/Scripts/angular-aria.js"></script>
     <script src="~/Scripts/angular-filters.js"></script>
@@ -45,11 +106,17 @@
     <script src="~/Scripts/angular-animate.js"></script>
     <script src="~/Scripts/angular-filters.js"></script>
     <script src="~/Scripts/angular-material.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
     <script src="~/App/LivrariaApp.js"></script>
+    <script src="~/Scripts/accounting.js"></script>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/money.js"></script>
+
+
+
 </head>
-<body ng-app="LivrariaAPP">
-    <div  class="navbar navbar-inverse navbar-fixed-top">
+<body ng-app="LivrariaAPP" ng-cloak>
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -72,8 +139,8 @@
                 </ul>
             </div>
         </div>
-    </div>   
-    <div class="container body-content">
+    </div>
+    <div id="mainContainer" class="container body-content ">
         @RenderBody()
         <hr />
         <footer>
@@ -81,8 +148,8 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+   
     @RenderSection("scripts", required: false)
+  
 </body>
 </html>

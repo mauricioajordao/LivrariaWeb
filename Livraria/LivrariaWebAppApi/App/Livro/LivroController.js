@@ -102,16 +102,19 @@ app.controller("LivroController", ['$scope', '$http', '$location', '$routeParams
 
             for (item in $scope.ListaAssuntos) {
 
-                var opt = "".concat("<option value=", item.Codigo, ">", item.Nome, "</option>");
+                var opt = "".concat("<option value=", $scope.ListaAssuntos[item].Codigo, ">", $scope.ListaAssuntos[item].Descricao, "</option>");
                 $('#selectassuntos').append(opt);
             };
 
             for (item in $scope.ListaAutores){
 
-                var opt = "".concat("<option value=", item.Codigo, ">", item.Descricao, "</option>");
+                var opt = "".concat("<option value=", $scope.ListaAutores[item].Codigo, ">", $scope.ListaAutores[item].Nome, "</option>");
 
                 $('#selectaautores').append(opt);
             };
+            $('#selectaautores').selectpicker();
+            $('#selectassuntos').selectpicker();
+
 
             $scope.LimpaDados();
             };

@@ -241,6 +241,7 @@
     <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\multi-select.css" />
     <Content Include="Content\ngSelect.css" />
     <Content Include="Content\ngSelect.min.css" />
     <Content Include="Controllers\bootstrap-multiselect.html" />
@@ -348,10 +349,16 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\github-api.js" />
+    <Content Include="Scripts\handlebars.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\Jquery-MultiSelect.js" />
+    <Content Include="Scripts\jquery.multi-select.js" />
+    <Content Include="Scripts\jquery.quicksearch.js" />
+    <Content Include="Scripts\jquery.tinysort.js" />
     <Content Include="Scripts\jstd-scenario-adapter-config.js" />
     <Content Include="Scripts\jstd-scenario-adapter.js" />
     <Content Include="Scripts\materialize.js" />
@@ -361,6 +368,7 @@
     <Content Include="Scripts\ngSelect.js" />
     <Content Include="Scripts\ngSelect.min.js" />
     <Content Include="Scripts\Pagination.js" />
+    <Content Include="Scripts\rainbow.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
